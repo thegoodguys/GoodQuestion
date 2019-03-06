@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
-import './App.css';
+import './styles.css';
+import MainHeader from './components/MainHeader'
+import FilterBox from './components/FilterBox';
+import MainContainer from './containers/MainContainer'
 
 class App extends Component {
+
   render() {
     return (
       <div className="App">
-        <h1>Hello World!</h1>
+        <MainHeader />
+        <FilterBox />
+        <MainContainer />
       </div>
     );
   } 
