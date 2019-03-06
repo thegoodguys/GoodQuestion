@@ -31,7 +31,10 @@ databaseController.saveLocation = (req, res, next) => {
         location_name: req.body.location_name
     })
     .then(result => res.status(200).json(result))
-    .then(result => res.locals.locationData = result)
+    .then(result => {
+        console.log(result);
+        res.locals.locationData = result
+    })
     .catch(err => res.status(500).json({error: err.message}))
     next()
 }
