@@ -7,12 +7,12 @@ class FilterBox extends Component {
       <div className="FilterBox">
         <p id="filterBy">FILTER BY</p>
         <ul className="filters">
-            <li>COMPANIES</li>
-            <li>POSITION APPLIED FOR</li>
-            <li>ROUND/INTERVIEW TYPE</li>
-            <li>COMPANY LOCATION</li>
-            <li>USERS</li>
-            <li>MOST RECENT</li>
+            <li onClick={() => {console.log('hit')}}>COMPANIES</li>
+            <li onClick={() => {console.log('hit')}}>POSITION APPLIED FOR</li>
+            <li onClick={() => {console.log('hit')}}>ROUND/INTERVIEW TYPE</li>
+            <li onClick={() => {console.log('hit')}}>COMPANY LOCATION</li>
+            <li onClick={() => {console.log('hit')}}>USERS</li>
+            <li onClick={() => {console.log('hit')}}>MOST RECENT</li>
         </ul>
       </div>
     );

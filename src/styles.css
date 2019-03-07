@@ -88,9 +88,9 @@ h1 {
   outline: 0;
 }
 
-/* MAIN CONTAINER */
+/* Router CONTAINER */
 
-.MainContainer {
+.RouterContainer {
   grid-area: b;
   display: flex;
   flex-direction: row;

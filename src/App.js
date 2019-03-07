@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './styles.css';
 import MainHeader from './components/MainHeader'
 import FilterBox from './components/FilterBox';
-import MainContainer from './containers/MainContainer'
 import { BrowserRouter as Router } from 'react-router-dom';
 import RouterContainer from './containers/RouterContainer'
 
