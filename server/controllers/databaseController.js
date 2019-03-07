@@ -6,108 +6,104 @@ databaseController.saveUser = (req, res, next) => {
     db.one('insert into users (username) values (${username}) returning *', {
         username: req.body.username
     })
-    .then(result => res.status(200).json(result))
-    .then(result => res.locals.userData = result)
-    .catch(err => res.status(500).json({error: err.message}))
-    next()
+    .then(result => {
+        res.locals.userData = result;
+        next();
+    })
+    .catch(err => res.status(500).json({error: err.message}))  
 }
 
 
 //This works
 databaseController.saveCompany = (req, res, next) => {
-    db.one('insert into companies (name) values (${name}) returning *', {
-        name: req.body.name
+    db.one('insert into companies (company_name) values (${company_name}) returning *', {
+        company_name: req.body.company_name
     })
-    .then(result => res.status(200).json(result))
-    .then(result => res.locals.companyData = result)
+    .then(result => {
+        res.locals.companyData = result;
+        next();
+    })
     .catch(err => res.status(500).json({error: err.message}))
-    next()
 }
 
 
-
+//This works
 databaseController.saveLocation = (req, res, next) => {
     db.one('insert into locations (location_name) values (${location_name}) returning *', {
         location_name: req.body.location_name
     })
-    .then(result => res.status(200).json(result))
     .then(result => {
-        console.log(result);
-        res.locals.locationData = result
+        res.locals.locationData = result;
+        next();
     })
     .catch(err => res.status(500).json({error: err.message}))
-    next()
 }
 
 
-
+//This works
 databaseController.saveRole = (req, res, next) => {
     db.one('insert into roles (role_name) values (${role_name}) returning *', {
         role_name: req.body.role_name
     })
-    .then(result => res.status(200).json(result))
-    .then(result => res.locals.roleData = result)
+    .then(result => {
+        res.locals.roleData = result;
+        next();
+    })
     .catch(err => res.status(500).json({error: err.message}))
-    next()
 }
 
 
-
+//This works
 databaseController.saveRound = (req, res, next) => {
     db.one('insert into rounds (round) values (${round}) returning *', {
         round: req.body.round
     })
-    .then(result => res.status(200).json(result))
-    .then(result => res.locals.roundData = result)
+    .then(result => {
+        res.locals.roundData = result;
+        next();
+    })
     .catch(err => res.status(500).json({error: err.message}))
-    next()
 }
 
 
-
+//This works
 databaseController.saveType = (req, res, next) => {
     db.one('insert into types (type) values (${type}) returning *', {
         type: req.body.type
     })
-    .then(result => res.status(200).json(result))
-    .then(result => res.locals.typeData = result)
+    .then(result => {
+        res.locals.typeData = result
+        next();
+    })
     .catch(err => res.status(500).json({error: err.message}))
-    next()
 }
-
-
-
-
-
 
 
 
 
 databaseController.saveQuestion = (req, res, next) => {
-    const username = res.locals.userData.username;
-    const company_name = res.locals.companyData.company_name;
-    const role = res.locals.roleData.role_name;
-    const location = res.locals.locationData.location_name;
-    const round = res.locals.roundData.round;
-    const type = res.locals.typeData.type;
-    const question_votes = 0;
-
-    db.one('insert into questions (id, username, company_name, role, location, round, title, content, type, question_votes) values (${id}, ${username}, ${company_name}, ${role}, ${location}, ${round}, ${title}, ${content}, ${type}, ${question_votes}) returning *', {
-        id: req.body.id,
-        username: username,
-        company_name: company_name,
-        role: role,
-        location: location,
-        round: round,
+    db.one('insert into questions (username, company_name, location_name, role_name, round, title, content, type, question_votes) values (${usernameID}, ${company_nameID}, ${location_nameID}, ${role_nameID}, ${roundID}, ${title}, ${content}, ${typeID}, ${question_votes}) returning *', {
+        usernameID: res.locals.userData.id,
+        company_nameID: res.locals.companyData.id,
+        location_nameID: res.locals.locationData.id,
+        role_nameID: res.locals.roleData.id,
+        roundID: res.locals.roundData.id,
         title: req.body.title,
         content: req.body.content,
-        type: type,
-        question_votes: question_votes
+        typeID: res.locals.typeData.id,
+        question_votes: 0
     })
-    .then(result => res.status(200).json(result))
-    .then(result => res.locals.questionData = result)
+    .then(result => {
+        console.log("result for question:", result)
+        res.locals.questionData = result
+        return res.locals.questionData
+    })
+    .then(result => {
+        console.log("final res.locals:", res.locals)
+        res.status(200).json(result);
+        next();
+    })
     .catch(err => res.status(500).json({error: err.message}))
-    next()
 }
 
 
