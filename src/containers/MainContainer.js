@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
 import '../styles.css';
-import QuestionComponent from '../components/QuestionComponent'
+import QuestionComponent from '../components/QuestionComponent';
+
 
 class MainContainer extends Component {
     constructor(props){
         super(props);
         this.state = {
-          title: '',
-          role: '',
-          company: '',
-          location: '',
-          type: '',
+          username: '',
+          company_name: '',
+          role_name: '',
           round: '',
+          type: '',
+          title: '',
           content: '',
+          location_name: '',
           tips: ''
         }
 
@@ -29,17 +31,26 @@ class MainContainer extends Component {
     }
 
     postQuestion(){
-      fetch('http://localhost:3001/postToQuestions')
-        .then(res => res)
+      fetch('http://localhost:3002/postQuestion', {
+        method: 'POST',
+        mode: 'cors',
+        headers:  {
+          "Content-Type": 'application/json'
+        },
+        body: JSON.stringify(this.state)
+      })
+        .then(res => res.json())
+        .then(res => console.log("Success!"))
         .then(res => (
           this.setState((state) => ({
-            title: '',
-            role: '',
-            company: '',
-            location: '',
-            type: '',
+            username: '',
+            company_name: '',
+            role_name: '',
             round: '',
+            type: '',
+            title: '',
             content: '',
+            location_name: '',
             tips: ''
       }))))
         .catch(err => console.log("***Error: ", err))
@@ -47,12 +58,12 @@ class MainContainer extends Component {
   
     render() {
     return (
-      <div className="MainContainer">
+      <>
         <QuestionComponent
           handleChange={this.handleChange}
           postQuestion={this.postQuestion}        
         />
-      </div>
+      </>
     );
   } 
 }

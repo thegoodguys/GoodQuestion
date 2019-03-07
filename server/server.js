@@ -6,13 +6,18 @@ const db = require('../postgres/database.js');
 const databaseController = require('./controllers/databaseController.js')
 
 
+// Enable CORS
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
+
+
 app.use(bodyParser.json()); // for parsing application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false })); // for parsing application/x-www-form-urlencoded
 
 app.use(express.static('public'))
-
-
-
 
 
 //This works -- but gives error: Cannot set headers after they are sent to the client
@@ -53,6 +58,6 @@ app.post('/postQuestion', databaseController.saveUser, databaseController.saveCo
 
 
 
-app.listen(3000); //listens on port 3000 -> http://localhost:3000/
+app.listen(3002); //listens on port 3000 -> http://localhost:3000/
 console.log("Listening on port 3000")
 

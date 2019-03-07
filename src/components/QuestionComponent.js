@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import '../styles.css';
+import { Switch, Route, withRouter } from 'react-router-dom';
+
 
 
 
@@ -22,7 +24,7 @@ class QuestionComponent extends Component {
         <span id="questionSpan">
                 Position Applied For: 
                 <input 
-                        id="role" 
+                        id="role_name" 
                         placeholder="Front-end, Back-end, Full-stack, etc..."
                         onChange={this.props.handleChange}
                 />
@@ -31,7 +33,7 @@ class QuestionComponent extends Component {
         <span id="questionSpan">
                 Company Applied For: 
                 <input 
-                        id="company" 
+                        id="company_name" 
                         placeholder="Google, Netflix, Wag, Facebook, etc..."
                         onChange={this.props.handleChange}
                 />
@@ -40,7 +42,7 @@ class QuestionComponent extends Component {
         <span id="questionSpan">
                 Company Location: 
                 <input 
-                        id="location" 
+                        id="location_name" 
                         placeholder="Los Angeles, San Fran, New York, etc..."
                         onChange={this.props.handleChange}
                 />
@@ -87,7 +89,7 @@ class QuestionComponent extends Component {
 }
 
 
-export default QuestionComponent;
+export default withRouter(QuestionComponent);
 
 
 
