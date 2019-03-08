@@ -207,6 +207,7 @@ li {
 
 #mostRecent {
   color: black;
+  text-decoration: none;
 }
 
 #mostRecent:active {

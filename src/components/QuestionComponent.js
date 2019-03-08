@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import '../styles.css';
-import { withRouter } from 'react-router-dom';
-
+import { Link, withRouter } from 'react-router-dom';
 
 
 
@@ -81,8 +80,10 @@ class QuestionComponent extends Component {
                 />
         </span>
         
+        <Link to="/specific">
         <button id="submitButton" onClick={this.props.submitQuestion}>SUBMIT</button>
-      
+        </Link>
+        
       </div>
     );
   } 
