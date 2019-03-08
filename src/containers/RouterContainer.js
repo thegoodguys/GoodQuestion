@@ -2,6 +2,7 @@ import { Switch, Route, withRouter } from 'react-router-dom';
 import QuestionComponent from '../components/QuestionComponent';
 import React, { Component } from 'react';
 import MainContainer from './MainContainer';
+import SpecificComponent from '../components/SpecificComponent';
 
 
 class RouterContainer extends Component {
@@ -17,12 +18,13 @@ class RouterContainer extends Component {
           content: '',
           location_name: '',
           tips: '',
-          questions: []
+          questions: [],
+          active_state: []
         }
 
     this.handleChange = this.handleChange.bind(this); 
     this.submitQuestion = this.submitQuestion.bind(this);
-
+    this.setActiveState = this.setActiveState.bind(this);
     }
 
     componentDidMount(){
@@ -39,6 +41,13 @@ class RouterContainer extends Component {
       e.preventDefault();
       this.setState({
           [e.target.id]: e.target.value,
+      })
+    }
+
+    setActiveState(data){
+      console.log("***Data: ", data)
+      this.setState({
+        active_state: data
       })
     }
 
@@ -78,7 +87,8 @@ class RouterContainer extends Component {
                 <Route
                     exact path='/'
                     render={() => <MainContainer
-                     questions={this.state.questions}
+                      setActiveState={this.setActiveState}
+                      questions={this.state.questions}
                     />}
                 />
                 <Route
@@ -86,6 +96,12 @@ class RouterContainer extends Component {
                     render={(props) => <QuestionComponent 
                         handleChange={this.handleChange}
                         submitQuestion={this.submitQuestion}
+                    />}
+                />
+                 <Route
+                    exact path='/specific'
+                    render={(props) => <SpecificComponent
+                      activeState={this.state}
                     />}
                 />
             </Switch>

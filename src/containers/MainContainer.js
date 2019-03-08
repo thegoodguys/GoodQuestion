@@ -13,7 +13,18 @@ class MainContainer extends Component {
         for(let i = 0; i < questions.length; i += 1){
           array.push(
             <div key={i} id={i} className="questionDiv">
-              <p id="questionTitle">{this.props.questions[i].title}</p>
+              
+              <Link to={{
+                pathname: "/specific",
+                state: { active_state: "I'm state"}
+              }}>
+              <p 
+                onClick={() => this.props.setActiveState(this.props.questions[i])}
+                id="questionTitle">
+              {this.props.questions[i].title}
+              </p>
+              </Link>
+              
               <div className="questionTagDiv">
                 <p id="questionTag">{this.props.questions[i].company_name}</p>
                 <p id="questionTag">{this.props.questions[i].role_name}</p>
