@@ -21,39 +21,44 @@ app.use(express.static('public'))
 
 
 //This works -- but gives error: Cannot set headers after they are sent to the client
-app.post('/postUser', databaseController.saveUser, (req,res) => {
+app.get('/getUser', databaseController.saveUser, (req,res) => {
     res.json(res.locals.userData);
 });
 
 //This works
-app.post('/postCompany', databaseController.saveCompany, (req,res) => {
+app.get('/getCompany', databaseController.saveCompany, (req,res) => {
     res.json(res.locals.companyData);
 });
 
 //This works
-app.post('/postLocation', databaseController.saveLocation, (req,res) => {
+app.get('/getLocation', databaseController.saveLocation, (req,res) => {
     res.json(res.locals.locationData);
 });
 
 //This works 
-app.post('/postRole', databaseController.saveRole, (req, res)=>{
+app.get('/getRole', databaseController.saveRole, (req, res)=>{
     res.json(res.locals.roleData);
 })
 
 //This works
-app.post('/postRound', databaseController.saveRound, (req, res)=>{
+app.get('/getRound', databaseController.saveRound, (req, res)=>{
     res.json(res.locals.roundData);
 })
 
 //This works
-app.post('/postType', databaseController.saveType, (req, res)=>{
+app.get('/getType', databaseController.saveType, (req, res)=>{
     res.json(res.locals.typeData);
+})
+
+app.get('/getQuestions', databaseController.getQuestions, (req,res)=>{
+    res.json(res.locals.questions)
 })
 
 
 //This works
 app.post('/postQuestion', databaseController.saveUser, databaseController.saveCompany, databaseController.saveLocation, databaseController.saveRole, databaseController.saveRound, databaseController.saveType, databaseController.saveQuestion, (req,res) => {
-    res.json(res.locals.questionData);
+    console.log('Insert success!')
+    res.status(200).json(res.locals.questionData);
 });
 
 

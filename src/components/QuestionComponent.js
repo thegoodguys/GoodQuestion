@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../styles.css';
-import { Switch, Route, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 
 
@@ -13,7 +13,7 @@ class QuestionComponent extends Component {
         <p id="submitTitle">SUBMIT YOUR QUESTION</p>
         
         <span id="questionSpan">
-                Question Title: 
+                Question Title:  
                 <input 
                         id="title" 
                         placeholder="Fizzbuzz, Circle Country, etc..."
@@ -81,7 +81,7 @@ class QuestionComponent extends Component {
                 />
         </span>
         
-        <button id="postButton" onClick={this.props.postQuestion}>SUBMIT</button>
+        <button id="submitButton" onClick={this.props.submitQuestion}>SUBMIT</button>
       
       </div>
     );
