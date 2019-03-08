@@ -1,69 +1,44 @@
 import React, { Component } from 'react';
 import '../styles.css';
-import QuestionComponent from '../components/QuestionComponent';
+import { Link } from 'react-router-dom';
 
 
 class MainContainer extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-          username: '',
-          company_name: '',
-          role_name: '',
-          round: '',
-          type: '',
-          title: '',
-          content: '',
-          location_name: '',
-          tips: ''
-        }
-
-    this.handleChange = this.handleChange.bind(this); 
-    this.postQuestion = this.postQuestion.bind(this);
-
-    }
-
-    handleChange(e){
-      e.preventDefault();
-      this.setState({
-          [e.target.id]: e.target.value,
-      })
-    }
-
-    postQuestion(){
-      fetch('http://localhost:3002/postQuestion', {
-        method: 'POST',
-        mode: 'cors',
-        headers:  {
-          "Content-Type": 'application/json'
-        },
-        body: JSON.stringify(this.state)
-      })
-        .then(res => res.json())
-        .then(res => console.log("Success!"))
-        .then(res => (
-          this.setState((state) => ({
-            username: '',
-            company_name: '',
-            role_name: '',
-            round: '',
-            type: '',
-            title: '',
-            content: '',
-            location_name: '',
-            tips: ''
-      }))))
-        .catch(err => console.log("***Error: ", err))
-    }
   
-    render() {
+    render() { 
+
+      let array = [];
+      let questions = this.props.questions
+      if (questions.length > 0){
+        for(let i = 0; i < questions.length; i += 1){
+          array.push(
+            <div key={i} id={i} className="questionDiv">
+              <p id="questionTitle">{this.props.questions[i].title}</p>
+              <div className="questionTagDiv">
+                <p id="questionTag">{this.props.questions[i].company_name}</p>
+                <p id="questionTag">{this.props.questions[i].role_name}</p>
+                <p id="questionTag">{this.props.questions[i].type}</p>
+              </div>
+            </div>
+          )
+          console.log("***Questions: ", questions)
+        }
+      }
+
+    
+
     return (
-      <>
-        <QuestionComponent
-          handleChange={this.handleChange}
-          postQuestion={this.postQuestion}        
-        />
-      </>
+      <div>
+        <div className="titleAndButton">
+          {<h1>INTERVIEW QUESTIONS</h1>}
+          <Link to="/question">
+          <button id="postButton">POST QUESTION</button>
+          </Link>
+        </div>
+        <div>
+          {array}
+        </div>
+      </div>
     );
   } 
 }
