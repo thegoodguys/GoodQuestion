@@ -13,7 +13,7 @@ class QuestionComponent extends Component {
         <p id="submitTitle">SUBMIT YOUR QUESTION</p>
         
         <span id="questionSpan">
-                Question Title: 
+                Question Title:  
                 <input 
                         id="title" 
                         placeholder="Fizzbuzz, Circle Country, etc..."
