@@ -34,7 +34,7 @@ databaseController.saveCompany = (req, res, next) => {
 
 //This works
 databaseController.saveLocation = (req, res, next) => {
-    db.one('insert into locations (location_name) values (${location_name})  ON CONFLICT (location_name) DO UPDATE SET location_name = excluded.location_name RETURNING id', {
+    db.one('insert into locations (location_name) values (${location_name}) ON CONFLICT (location_name) DO UPDATE SET location_name = excluded.location_name RETURNING id', {
         location_name: req.body.location_name
     })
     .then(result => {
@@ -47,7 +47,7 @@ databaseController.saveLocation = (req, res, next) => {
 
 //This works
 databaseController.saveRole = (req, res, next) => {
-    db.one('insert into roles (role_name) values (${role_name})  ON CONFLICT (role_name) DO UPDATE SET role_name = excluded.role_name RETURNING id', {
+    db.one('insert into roles (role_name) values (${role_name}) ON CONFLICT (role_name) DO UPDATE SET role_name = excluded.role_name RETURNING id', {
         role_name: req.body.role_name
     })
     .then(result => {

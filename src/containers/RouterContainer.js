@@ -2,8 +2,6 @@ import { Switch, Route, withRouter } from 'react-router-dom';
 import QuestionComponent from '../components/QuestionComponent';
 import React, { Component } from 'react';
 import MainContainer from './MainContainer';
-import HelloComponent from '../components/Hello'
-
 
 
 class RouterContainer extends Component {
@@ -18,13 +16,24 @@ class RouterContainer extends Component {
           title: '',
           content: '',
           location_name: '',
-          tips: ''
+          tips: '',
+          questions: []
         }
 
     this.handleChange = this.handleChange.bind(this); 
-    this.postQuestion = this.postQuestion.bind(this);
+    this.submitQuestion = this.submitQuestion.bind(this);
 
     }
+
+    componentDidMount(){
+        fetch('http://localhost:3002/getQuestions')
+          .then(res => res.json())
+          .then(res => 
+            this.setState((state) => ({
+              questions: res}
+            )))
+          .catch(err => console.log("***Error: ", err))
+    }    
 
     handleChange(e){
       e.preventDefault();
@@ -33,7 +42,9 @@ class RouterContainer extends Component {
       })
     }
 
-    postQuestion(){
+
+    
+    submitQuestion(){
       fetch('http://localhost:3002/postQuestion', {
         method: 'POST',
         mode: 'cors',
@@ -66,13 +77,15 @@ class RouterContainer extends Component {
             <Switch>
                 <Route
                     exact path='/'
-                    component={MainContainer}
+                    render={() => <MainContainer
+                     questions={this.state.questions}
+                    />}
                 />
                 <Route
                     exact path='/question'
                     render={(props) => <QuestionComponent 
                         handleChange={this.handleChange}
-                        postQuestion={this.postQuestion}
+                        submitQuestion={this.submitQuestion}
                     />}
                 />
             </Switch>

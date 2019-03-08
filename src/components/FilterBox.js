@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../styles.css';
+import { Link } from 'react-router-dom'
 
 class FilterBox extends Component {
   render() {
@@ -12,7 +13,9 @@ class FilterBox extends Component {
             <li onClick={() => {console.log('hit')}}>ROUND/INTERVIEW TYPE</li>
             <li onClick={() => {console.log('hit')}}>COMPANY LOCATION</li>
             <li onClick={() => {console.log('hit')}}>USERS</li>
-            <li onClick={() => {console.log('hit')}}>MOST RECENT</li>
+            <Link to="/">
+            <li id="mostRecent">MOST RECENT</li>
+          </Link>
         </ul>
       </div>
     );
